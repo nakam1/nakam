@@ -1,0 +1,8 @@
+/usr/bin/nakam-cli		--	gen_context(system_u:object_r:nakam_exec_t,s0)
+/usr/sbin/nakamd		--	gen_context(system_u:object_r:nakam_exec_t,s0)
+/usr/lib(64)?/nakam/nakamd		--	gen_context(system_u:object_r:nakam_exec_t,s0)
+
+/etc/nakam(/.*)?		gen_context(system_u:object_r:nakam_conf_t,s0)
+/var/lib/nakam(/.*)?		gen_context(system_u:object_r:nakam_var_lib_t,s0)
+
+(/var)?/run/nakamd(/.*)?   gen_context(system_u:object_r:nakam_var_run_t,s0)

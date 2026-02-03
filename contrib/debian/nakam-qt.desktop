@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=Nakam
+Comment= NAKAM P2P Cryptocurrency
+Comment[fr]= NAKAM, monnaie virtuelle cryptographique pair à pair
+Comment[tr]= NAKAM, eşten eşe kriptografik sanal para birimi
+Exec=nakam-qt %u
+Terminal=false
+Type=Application
+Icon=nakam128
+MimeType=x-scheme-handler/nakam;
+Categories=Office;Finance;
+StartupWMClass=Nakam-qt

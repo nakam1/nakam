@@ -1,0 +1,701 @@
+# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+bin_PROGRAMS += qt/nakam-qt
+EXTRA_LIBRARIES += qt/libbitcoinqt.a
+
+# nakam qt core #
+include Makefile.qt_locale.include
+
+QT_FORMS_UI = \
+  qt/forms/addressbookpage.ui \
+  qt/forms/askpassphrasedialog.ui \
+  qt/forms/coincontroldialog.ui \
+  qt/forms/editaddressdialog.ui \
+  qt/forms/helpmessagedialog.ui \
+  qt/forms/intro.ui \
+  qt/forms/openuridialog.ui \
+  qt/forms/optionsdialog.ui \
+  qt/forms/rpcconsole.ui \
+  qt/nakam/forms/loadingdialog.ui \
+  qt/nakam/forms/snackbar.ui \
+  qt/nakam/forms/navmenuwidget.ui \
+  qt/nakam/forms/lockunlock.ui \
+  qt/nakam/forms/expandablebutton.ui \
+  qt/nakam/forms/receivedialog.ui \
+  qt/nakam/forms/topbar.ui \
+  qt/nakam/forms/txrow.ui \
+  qt/nakam/forms/dashboardwidget.ui \
+  qt/nakam/forms/addresslabelrow.ui \
+  qt/nakam/forms/contactdropdownrow.ui \
+  qt/nakam/forms/mninfodialog.ui \
+  qt/nakam/forms/optionbutton.ui \
+  qt/nakam/forms/masternodewizarddialog.ui \
+  qt/nakam/forms/mnrow.ui \
+  qt/nakam/forms/masternodeswidget.ui \
+  qt/nakam/forms/myaddressrow.ui \
+  qt/nakam/forms/sendchangeaddressdialog.ui \
+  qt/nakam/forms/sendconfirmdialog.ui \
+  qt/nakam/forms/sendcustomfeedialog.ui \
+  qt/nakam/forms/sendchangeaddressdialog.ui \
+  qt/nakam/forms/sendmultirow.ui \
+  qt/nakam/forms/send.ui \
+  qt/nakam/forms/addnewaddressdialog.ui \
+  qt/nakam/forms/addnewcontactdialog.ui \
+  qt/nakam/forms/requestdialog.ui \
+  qt/nakam/forms/receivewidget.ui \
+  qt/nakam/forms/tooltipmenu.ui \
+  qt/nakam/forms/addresseswidget.ui \
+  qt/nakam/forms/defaultdialog.ui \
+  qt/nakam/settings/forms/settingsbackupwallet.ui \
+  qt/nakam/settings/forms/settingsexportcsv.ui \
+  qt/nakam/settings/forms/settingsbittoolwidget.ui \
+  qt/nakam/settings/forms/settingsconsolewidget.ui \
+  qt/nakam/settings/forms/settingsdisplayoptionswidget.ui \
+  qt/nakam/settings/forms/settingsfaqwidget.ui \
+  qt/nakam/settings/forms/settingsinformationwidget.ui \
+  qt/nakam/settings/forms/settingsmainoptionswidget.ui \
+  qt/nakam/settings/forms/settingsmultisenddialog.ui \
+  qt/nakam/settings/forms/settingsmultisendwidget.ui \
+  qt/nakam/settings/forms/settingssignmessagewidgets.ui \
+  qt/nakam/settings/forms/settingswalletoptionswidget.ui \
+  qt/nakam/settings/forms/settingswalletrepairwidget.ui \
+  qt/nakam/settings/forms/settingswidget.ui \
+  qt/nakam/forms/welcomecontentwidget.ui \
+  qt/nakam/forms/splash.ui
+
+QT_MOC_CPP = \
+  qt/moc_addressbookpage.cpp \
+  qt/moc_addresstablemodel.cpp \
+  qt/moc_askpassphrasedialog.cpp \
+  qt/moc_bantablemodel.cpp \
+  qt/moc_bitcoinaddressvalidator.cpp \
+  qt/nakam/moc_nakamgui.cpp \
+  qt/moc_bitcoinunits.cpp \
+  qt/moc_clientmodel.cpp \
+  qt/moc_coincontroldialog.cpp \
+  qt/moc_coincontroltreewidget.cpp \
+  qt/moc_csvmodelwriter.cpp \
+  qt/moc_editaddressdialog.cpp \
+  qt/moc_guiutil.cpp \
+  qt/moc_intro.cpp \
+  qt/moc_macdockiconhandler.cpp \
+  qt/moc_macnotificationhandler.cpp \
+  qt/moc_notificator.cpp \
+  qt/moc_openuridialog.cpp \
+  qt/moc_optionsdialog.cpp \
+  qt/moc_optionsmodel.cpp \
+  qt/moc_peertablemodel.cpp \
+  qt/moc_paymentserver.cpp \
+  qt/moc_qvalidatedlineedit.cpp \
+  qt/moc_qvaluecombobox.cpp \
+  qt/moc_recentrequeststablemodel.cpp \
+  qt/moc_rpcconsole.cpp \
+  qt/moc_trafficgraphwidget.cpp \
+  qt/moc_transactionfilterproxy.cpp \
+  qt/moc_transactiontablemodel.cpp \
+  qt/moc_utilitydialog.cpp \
+  qt/moc_walletmodel.cpp \
+  qt/nakam/moc_loadingdialog.cpp \
+  qt/nakam/moc_pwidget.cpp \
+  qt/nakam/moc_focuseddialog.cpp \
+  qt/nakam/moc_snackbar.cpp \
+  qt/nakam/moc_navmenuwidget.cpp \
+  qt/nakam/moc_lockunlock.cpp \
+  qt/nakam/moc_expandablebutton.cpp \
+  qt/nakam/moc_privatelabel.cpp \
+  qt/nakam/moc_furabstractlistitemdelegate.cpp \
+  qt/nakam/moc_receivedialog.cpp \
+  qt/nakam/moc_pfborderimage.cpp \
+  qt/nakam/moc_topbar.cpp \
+  qt/nakam/moc_txrow.cpp \
+  qt/nakam/moc_dashboardwidget.cpp \
+  qt/nakam/moc_addresslabelrow.cpp \
+  qt/nakam/moc_contactdropdownrow.cpp \
+  qt/nakam/moc_mninfodialog.cpp \
+  qt/nakam/moc_optionbutton.cpp \
+  qt/nakam/moc_mnmodel.cpp \
+  qt/nakam/moc_masternodewizarddialog.cpp \
+  qt/nakam/moc_mnrow.cpp \
+  qt/nakam/moc_masternodeswidget.cpp \
+  qt/nakam/moc_myaddressrow.cpp \
+  qt/nakam/moc_contactsdropdown.cpp \
+  qt/nakam/moc_sendchangeaddressdialog.cpp \
+  qt/nakam/moc_sendconfirmdialog.cpp \
+  qt/nakam/moc_sendcustomfeedialog.cpp \
+  qt/nakam/moc_sendchangeaddressdialog.cpp \
+  qt/nakam/moc_sendmultirow.cpp \
+  qt/nakam/moc_send.cpp \
+  qt/nakam/moc_addnewaddressdialog.cpp \
+  qt/nakam/moc_addnewcontactdialog.cpp \
+  qt/nakam/moc_requestdialog.cpp \
+  qt/nakam/moc_receivewidget.cpp \
+  qt/nakam/moc_tooltipmenu.cpp \
+  qt/nakam/moc_addresseswidget.cpp \
+  qt/nakam/moc_defaultdialog.cpp \
+  qt/nakam/settings/moc_settingsbackupwallet.cpp \
+  qt/nakam/settings/moc_settingsexportcsv.cpp \
+  qt/nakam/settings/moc_settingsbittoolwidget.cpp \
+  qt/nakam/settings/moc_settingsconsolewidget.cpp \
+  qt/nakam/settings/moc_settingsdisplayoptionswidget.cpp \
+  qt/nakam/settings/moc_settingsfaqwidget.cpp \
+  qt/nakam/settings/moc_settingsinformationwidget.cpp \
+  qt/nakam/settings/moc_settingsmainoptionswidget.cpp \
+  qt/nakam/settings/moc_settingsmultisenddialog.cpp \
+  qt/nakam/settings/moc_settingsmultisendwidget.cpp \
+  qt/nakam/settings/moc_settingssignmessagewidgets.cpp \
+  qt/nakam/settings/moc_settingswalletoptionswidget.cpp \
+  qt/nakam/settings/moc_settingswalletrepairwidget.cpp \
+  qt/nakam/settings/moc_settingswidget.cpp \
+  qt/nakam/moc_welcomecontentwidget.cpp \
+  qt/nakam/moc_splash.cpp
+
+BITCOIN_MM = \
+  qt/macdockiconhandler.mm \
+  qt/macnotificationhandler.mm
+
+QT_MOC = \
+  qt/nakam.moc \
+  qt/intro.moc \
+  qt/rpcconsole.moc \
+  qt/nakam/settings/moc_settingsconsolewidget.cpp
+
+QT_QRC_CPP = qt/qrc_nakam.cpp
+QT_QRC = qt/nakam.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_nakam_locale.cpp
+QT_QRC_LOCALE = qt/nakam_locale.qrc
+
+PROTOBUF_CC = qt/paymentrequest.pb.cc
+PROTOBUF_H = qt/paymentrequest.pb.h
+PROTOBUF_PROTO = qt/paymentrequest.proto
+
+BITCOIN_QT_H = \
+  qt/addressbookpage.h \
+  qt/addresstablemodel.h \
+  qt/askpassphrasedialog.h \
+  qt/bantablemodel.h \
+  qt/bitcoinaddressvalidator.h \
+  qt/nakam/nakamgui.h \
+  qt/bitcoinunits.h \
+  qt/clientmodel.h \
+  qt/coincontroldialog.h \
+  qt/coincontroltreewidget.h \
+  qt/csvmodelwriter.h \
+  qt/editaddressdialog.h \
+  qt/guiconstants.h \
+  qt/guiutil.h \
+  qt/intro.h \
+  qt/macdockiconhandler.h \
+  qt/macnotificationhandler.h \
+  qt/networkstyle.h \
+  qt/notificator.h \
+  qt/openuridialog.h \
+  qt/optionsdialog.h \
+  qt/optionsmodel.h \
+  qt/paymentrequestplus.h \
+  qt/paymentserver.h \
+  qt/peertablemodel.h \
+  qt/platformstyle.h \
+  qt/qvalidatedlineedit.h \
+  qt/qvaluecombobox.h \
+  qt/recentrequeststablemodel.h \
+  qt/rpcconsole.h \
+  qt/trafficgraphwidget.h \
+  qt/transactionfilterproxy.h \
+  qt/transactionrecord.h \
+  qt/transactiontablemodel.h \
+  qt/utilitydialog.h \
+  qt/walletmodel.h \
+  qt/walletmodeltransaction.h \
+  qt/nakam/prunnable.h \
+  qt/nakam/pfborderimage.h \
+  qt/nakam/loadingdialog.h \
+  qt/winshutdownmonitor.h \
+  qt/nakam/pwidget.h \
+  qt/nakam/focuseddialog.h \
+  qt/nakam/guitransactionsutils.h \
+  qt/nakam/snackbar.h \
+  qt/nakam/navmenuwidget.h \
+  qt/nakam/lockunlock.h \
+  qt/nakam/receivedialog.h \
+  qt/nakam/furlistrow.h \
+  qt/nakam/furabstractlistitemdelegate.h \
+  qt/nakam/txviewholder.h \
+  qt/nakam/qtutils.h \
+  qt/nakam/expandablebutton.h \
+  qt/nakam/privatelabel.h \
+  qt/nakam/topbar.h \
+  qt/nakam/txrow.h \
+  qt/nakam/addressholder.h \
+  qt/nakam/addressfilterproxymodel.h \
+  qt/nakam/dashboardwidget.h \
+  qt/nakam/addresslabelrow.h \
+  qt/nakam/contactdropdownrow.h \
+  qt/nakam/mninfodialog.h \
+  qt/nakam/optionbutton.h \
+  qt/nakam/mnmodel.h \
+  qt/nakam/masternodewizarddialog.h \
+  qt/nakam/mnrow.h \
+  qt/nakam/masternodeswidget.h \
+  qt/nakam/myaddressrow.h \
+  qt/nakam/contactsdropdown.h \
+  qt/nakam/sendchangeaddressdialog.h \
+  qt/nakam/sendconfirmdialog.h \
+  qt/nakam/sendcustomfeedialog.h \
+  qt/nakam/sendchangeaddressdialog.h \
+  qt/nakam/sendmultirow.h \
+  qt/nakam/send.h \
+  qt/nakam/addnewaddressdialog.h \
+  qt/nakam/addnewcontactdialog.h \
+  qt/nakam/requestdialog.h \
+  qt/nakam/receivewidget.h \
+  qt/nakam/tooltipmenu.h \
+  qt/nakam/addresseswidget.h \
+  qt/nakam/defaultdialog.h \
+  qt/nakam/settings/settingsbackupwallet.h \
+  qt/nakam/settings/settingsexportcsv.h \
+  qt/nakam/settings/settingsbittoolwidget.h \
+  qt/nakam/settings/settingsconsolewidget.h \
+  qt/nakam/settings/settingsdisplayoptionswidget.h \
+  qt/nakam/settings/settingsfaqwidget.h \
+  qt/nakam/settings/settingsinformationwidget.h \
+  qt/nakam/settings/settingsmainoptionswidget.h \
+  qt/nakam/settings/settingsmultisenddialog.h \
+  qt/nakam/settings/settingsmultisendwidget.h \
+  qt/nakam/settings/settingssignmessagewidgets.h \
+  qt/nakam/settings/settingswalletoptionswidget.h \
+  qt/nakam/settings/settingswalletrepairwidget.h \
+  qt/nakam/settings/settingswidget.h \
+  qt/nakam/welcomecontentwidget.h \
+  qt/nakam/splash.h
+
+RES_ICONS = \
+  qt/res/icons/bitcoin.ico \
+  qt/res/icons/bitcoin.png \
+  qt/res/icons/bitcoin_testnet.ico \
+  qt/res/icons/bitcoin_testnet.png \
+  qt/res/icons/bitcoin_regtest.png \
+  qt/res/icons/lock_closed.png \
+  qt/res/icons/lock_open.png \
+  qt/res/icons/overview.png \
+  qt/res/icons/ic-transaction-received.svg \
+  qt/res/icons/ic-transaction-mint.svg \
+  qt/res/icons/ic-transaction-sent.svg \
+  qt/res/icons/ic-transaction-staked.svg \
+  qt/nakam/res/img/bg-dashboard-banner.png \
+  qt/nakam/res/img/bg-multi-number-dark.svg \
+  qt/nakam/res/img/ic-check-locked.svg \
+  qt/nakam/res/img/ic-check-console.svg \
+  qt/nakam/res/img/ic-nav-address.svg \
+  qt/nakam/res/img/ic-update.svg \
+  qt/nakam/res/img/bg-multi-number.svg \
+  qt/nakam/res/img/ic-check-mint-off.svg \
+  qt/nakam/res/img/ic-nav-dashboard-active.svg \
+  qt/nakam/res/img/ic-wallet-status-locked.svg \
+  qt/nakam/res/img/bg-splash.svg \
+  qt/nakam/res/img/bg-splash.png \
+  qt/nakam/res/img/ic-check-mint.svg \
+  qt/nakam/res/img/ic-nav-dashboard-hover.svg \
+  qt/nakam/res/img/ic-wallet-status-staking.svg \
+  qt/nakam/res/img/ic-check-peers-off.svg \
+  qt/nakam/res/img/ic-nav-dashboard.svg \
+  qt/nakam/res/img/ic-wallet-status-unlocked.svg \
+  qt/nakam/res/img/ic-check-peers.svg \
+  qt/nakam/res/img/ic-nav-master-active.svg \
+  qt/nakam/res/img/ic-watch-password-white.svg \
+  qt/nakam/res/img/bg-welcome-container.jpg \
+  qt/nakam/res/img/bg-welcome-container.png \
+  qt/nakam/res/img/bg-welcome-container.svg \
+  qt/nakam/res/img/bg-welcome-container@2x.png \
+  qt/nakam/res/img/bg-welcome-container@3x.png \
+  qt/nakam/res/img/ic-check-staking-off.svg \
+  qt/nakam/res/img/ic-nav-master-hover.svg \
+  qt/nakam/res/img/ic-watch-password.svg \
+  qt/nakam/res/img/bg-welcome.jpg \
+  qt/nakam/res/img/bg-welcome.svg \
+  qt/nakam/res/img/bg-welcome@2x.jpg \
+  qt/nakam/res/img/bg-welcome@3x.jpg \
+  qt/nakam/res/img/bg-welcome.png \
+  qt/nakam/res/img/ic-check-staking.svg \
+  qt/nakam/res/img/ic-nav-master.svg \
+  qt/nakam/res/img/img-dashboard-banner.jpg \
+  qt/nakam/res/img/btn-radio-active.svg \
+  qt/nakam/res/img/ic-check-mn-conf.svg \
+  qt/nakam/res/img/ic-check-coin-conf.svg \
+  qt/nakam/res/img/ic-check-sync-off.svg \
+  qt/nakam/res/img/ic-nav-privacy-active.svg \
+  qt/nakam/res/img/img-empty-contacts.svg \
+  qt/nakam/res/img/btn-radio-off.svg \
+  qt/nakam/res/img/ic-check-sync.png \
+  qt/nakam/res/img/ic-nav-privacy-hover.svg \
+  qt/nakam/res/img/img-empty-dark-contacts.svg \
+  qt/nakam/res/img/ic-contact-arrow-down.svg \
+  qt/nakam/res/img/ic-contact-arrow-down-white.svg \
+  qt/nakam/res/img/ic-check-sync.svg \
+  qt/nakam/res/img/ic-check-faq.svg \
+  qt/nakam/res/img/ic-check-privacy.svg \
+  qt/nakam/res/img/ic-check-privacy-off.svg \
+  qt/nakam/res/img/ic-nav-privacy.svg \
+  qt/nakam/res/img/img-empty-dark-error.svg \
+  qt/nakam/res/img/ic-add-label.svg \
+  qt/nakam/res/img/ic-pending.svg \
+  qt/nakam/res/img/ic-check-theme-dark.svg \
+  qt/nakam/res/img/ic-nav-receive-active.svg \
+  qt/nakam/res/img/img-empty-dark-masternode.svg \
+  qt/nakam/res/img/ic-add-liliac.svg \
+  qt/nakam/res/img/ic-check-theme-light.svg \
+  qt/nakam/res/img/ic-nav-receive-hover.svg \
+  qt/nakam/res/img/img-empty-dark-multisend.svg \
+  qt/nakam/res/img/ic-add-purple.svg \
+  qt/nakam/res/img/ic-check-white.svg \
+  qt/nakam/res/img/ic-nav-receive.svg \
+  qt/nakam/res/img/img-empty-dark-peers.svg \
+  qt/nakam/res/img/ic-add.svg \
+  qt/nakam/res/img/ic-check.svg \
+  qt/nakam/res/img/ic-nav-send-active.svg \
+  qt/nakam/res/img/img-empty-dark-staking-off.svg \
+  qt/nakam/res/img/img-empty-dark-staking-on.svg \
+  qt/nakam/res/img/ic-address-book-grey.svg \
+  qt/nakam/res/img/ic-chevron-left.svg \
+  qt/nakam/res/img/ic-nav-send-hover.svg \
+  qt/nakam/res/img/img-empty-dark-transactions.svg \
+  qt/nakam/res/img/ic-address-book-white.svg \
+  qt/nakam/res/img/ic-chevron-right.svg \
+  qt/nakam/res/img/ic-nav-send.svg \
+  qt/nakam/res/img/img-empty-error.svg \
+  qt/nakam/res/img/ic-address-book.svg \
+  qt/nakam/res/img/ic-clear-liliac.svg \
+  qt/nakam/res/img/ic-nav-settings-active.svg \
+  qt/nakam/res/img/img-empty-masternode.svg \
+  qt/nakam/res/img/ic-address-send-white.svg \
+  qt/nakam/res/img/ic-clear-purple.svg \
+  qt/nakam/res/img/ic-nav-settings-hover.svg \
+  qt/nakam/res/img/img-empty-multisend.svg \
+  qt/nakam/res/img/ic-address-send.svg \
+  qt/nakam/res/img/ic-close-white.svg \
+  qt/nakam/res/img/ic-nav-settings.svg \
+  qt/nakam/res/img/img-empty-peers.svg \
+  qt/nakam/res/img/img-empty-privacy.svg \
+  qt/nakam/res/img/img-empty-privacy-dark.svg \
+  qt/nakam/res/img/ic-arrow-drop-down-white.svg \
+  qt/nakam/res/img/ic-close.svg \
+  qt/nakam/res/img/ic-radio-liliac-on.svg \
+  qt/nakam/res/img/img-empty-staking-off.svg \
+  qt/nakam/res/img/ic-arrow-drop-down.svg \
+  qt/nakam/res/img/ic-coin-piv.svg \
+  qt/nakam/res/img/ic-receive-off.svg \
+  qt/nakam/res/img/img-empty-staking-on.svg \
+  qt/nakam/res/img/ic-arrow-drop-up-white.svg \
+  qt/nakam/res/img/ic-receive-on.svg \
+  qt/nakam/res/img/img-empty-transactions.svg \
+  qt/nakam/res/img/ic-arrow-drop-up.svg \
+  qt/nakam/res/img/ic-received.svg \
+  qt/nakam/res/img/img-logo-nakam.png \
+  qt/nakam/res/img/ic-arrow-drop-white-down.svg \
+  qt/nakam/res/img/ic-combo-box.svg \
+  qt/nakam/res/img/ic-send.svg \
+  qt/nakam/res/img/img-logo-nakam@2x.png \
+  qt/nakam/res/img/ic-arrow-purple-down.svg \
+  qt/nakam/res/img/ic-connect.svg \
+  qt/nakam/res/img/ic-submenu-lock.svg \
+  qt/nakam/res/img/img-logo-nakam@3x.png \
+  qt/nakam/res/img/img-logo-nakam.svg \
+  qt/nakam/res/img/ic-arrow-right-white.svg \
+  qt/nakam/res/img/ic-arrow-left-white.svg \
+  qt/nakam/res/img/ic-arrow-left.svg \
+  qt/nakam/res/img/ic-copy-liliac.svg \
+  qt/nakam/res/img/ic-submenu-staking.svg \
+  qt/nakam/res/img/img-nav-logo-nakam.png \
+  qt/nakam/res/img/ic-arrow-right.svg \
+  qt/nakam/res/img/ic-copy.svg \
+  qt/nakam/res/img/ic-copy-big.svg \
+  qt/nakam/res/img/ic-copy-big-white.svg \
+  qt/nakam/res/img/ic-submenu-unlock.svg \
+  qt/nakam/res/img/img-nav-logo.png \
+  qt/nakam/res/img/ic-arrow-white-left.svg \
+  qt/nakam/res/img/ic-exit.svg \
+  qt/nakam/res/img/ic-switch-liliac-on.svg \
+  qt/nakam/res/img/img-nav-logo.svg \
+  qt/nakam/res/img/ic-arrow-white-right.svg \
+  qt/nakam/res/img/ic-expand.svg \
+  qt/nakam/res/img/ic-switch-off.svg \
+  qt/nakam/res/img/img-qr-test-big.png \
+  qt/nakam/res/img/ic-check-active.svg \
+  qt/nakam/res/img/ic-folder.svg \
+  qt/nakam/res/img/ic-switch-on.svg \
+  qt/nakam/res/img/img-qr-test.png \
+  qt/nakam/res/img/ic-check-box.svg \
+  qt/nakam/res/img/ic-check-box-dark-active.svg \
+  qt/nakam/res/img/ic-check-box-indeterminate.svg \
+  qt/nakam/res/img/ic-check-box-liliac-indeterminate.svg \
+  qt/nakam/res/img/ic-label-liliac.svg \
+  qt/nakam/res/img/ic-transaction-warning.svg \
+  qt/nakam/res/img/ic-transaction-mint.svg \
+  qt/nakam/res/img/ic-transaction-mint-inactive.svg \
+  qt/nakam/res/img/img-qr.svg \
+  qt/nakam/res/img/ic-check-connect-off.svg \
+  qt/nakam/res/img/ic-check-tor-off.svg \
+  qt/nakam/res/img/ic-check-tor.svg \
+  qt/nakam/res/img/ic-label.svg \
+  qt/nakam/res/img/ic-transaction-received.svg \
+  qt/nakam/res/img/dark/ic-transaction-received.svg \
+  qt/nakam/res/img/dark/ic-transaction-warning.svg \
+  qt/nakam/res/img/dark/ic-transaction-mint.svg \
+  qt/nakam/res/img/dark/ic-transaction-mint-inactive.svg \
+  qt/nakam/res/img/ic-transaction-received-inactive.svg \
+  qt/nakam/res/img/dark/ic-transaction-received-inactive.svg \
+  qt/nakam/res/img/img-welcome-step1.png \
+  qt/nakam/res/img/ic-check-connect.svg \
+  qt/nakam/res/img/ic-menu-hover.svg \
+  qt/nakam/res/img/ic-transaction-sent.svg \
+  qt/nakam/res/img/ic-transaction-sent-inactive.svg \
+  qt/nakam/res/img/dark/ic-transaction-sent.svg \
+  qt/nakam/res/img/dark/ic-transaction-sent-inactive.svg \
+  qt/nakam/res/img/img-welcome-step2.png \
+  qt/nakam/res/img/ic-check-dark.svg \
+  qt/nakam/res/img/ic-mint.svg \
+  qt/nakam/res/img/ic-transaction-staked.svg \
+  qt/nakam/res/img/ic-transaction-staked-inactive.svg \
+  qt/nakam/res/img/dark/ic-transaction-staked.svg \
+  qt/nakam/res/img/dark/ic-transaction-staked-inactive.svg \
+  qt/nakam/res/img/img-welcome-step3.png \
+  qt/nakam/res/img/ic-check-liliac-on.svg \
+  qt/nakam/res/img/ic-nav-address-active.svg \
+  qt/nakam/res/img/ic-unlock-staking.svg \
+  qt/nakam/res/img/img-welcome-step4.png \
+  qt/nakam/res/img/ic-check-locked-off.svg \
+  qt/nakam/res/img/ic-nav-address-hover.svg \
+  qt/nakam/res/img/ic-update-liliac.svg \
+  qt/nakam/res/img/ic-arrow-drop-down-purple.svg \
+  qt/nakam/res/img/ic-arrow-drop-up-purple.svg \
+  qt/nakam/res/img/ic-check-liliac-indeterminate.svg \
+  qt/nakam/res/img/ic-check-box-liliac-indeterminate.svg \
+  qt/nakam/res/img/ic-check-box-indeterminate.svg \
+  qt/nakam/res/img/ani-loading-dark.gif \
+  qt/nakam/res/img/ani-loading.gif
+
+
+
+BITCOIN_QT_BASE_CPP = \
+  qt/bantablemodel.cpp \
+  qt/bitcoinaddressvalidator.cpp \
+  qt/nakam/nakamgui.cpp \
+  qt/bitcoinunits.cpp \
+  qt/clientmodel.cpp \
+  qt/csvmodelwriter.cpp \
+  qt/guiutil.cpp \
+  qt/intro.cpp \
+  qt/networkstyle.cpp \
+  qt/notificator.cpp \
+  qt/optionsdialog.cpp \
+  qt/optionsmodel.cpp \
+  qt/peertablemodel.cpp \
+  qt/platformstyle.cpp \
+  qt/qvalidatedlineedit.cpp \
+  qt/qvaluecombobox.cpp \
+  qt/rpcconsole.cpp \
+  qt/trafficgraphwidget.cpp \
+  qt/utilitydialog.cpp
+
+BITCOIN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
+
+BITCOIN_QT_WALLET_CPP = \
+  qt/addressbookpage.cpp \
+  qt/addresstablemodel.cpp \
+  qt/askpassphrasedialog.cpp \
+  qt/coincontroldialog.cpp \
+  qt/coincontroltreewidget.cpp \
+  qt/editaddressdialog.cpp \
+  qt/openuridialog.cpp \
+  qt/paymentrequestplus.cpp \
+  qt/paymentserver.cpp \
+  qt/recentrequeststablemodel.cpp \
+  qt/transactionfilterproxy.cpp \
+  qt/transactionrecord.cpp \
+  qt/transactiontablemodel.cpp \
+  qt/walletmodel.cpp \
+  qt/walletmodeltransaction.cpp \
+  qt/nakam/loadingdialog.cpp \
+  qt/nakam/pwidget.cpp \
+  qt/nakam/focuseddialog.cpp \
+  qt/nakam/guitransactionsutils.cpp \
+  qt/nakam/snackbar.cpp \
+  qt/nakam/navmenuwidget.cpp \
+  qt/nakam/lockunlock.cpp \
+  qt/nakam/receivedialog.cpp \
+  qt/nakam/furabstractlistitemdelegate.cpp \
+  qt/nakam/txviewholder.cpp \
+  qt/nakam/qtutils.cpp \
+  qt/nakam/expandablebutton.cpp \
+  qt/nakam/privatelabel.cpp \
+  qt/nakam/topbar.cpp \
+  qt/nakam/txrow.cpp \
+  qt/nakam/addressholder.cpp \
+  qt/nakam/addressfilterproxymodel.cpp \
+  qt/nakam/dashboardwidget.cpp \
+  qt/nakam/addresslabelrow.cpp \
+  qt/nakam/contactdropdownrow.cpp \
+  qt/nakam/contactsdropdown.cpp \
+  qt/nakam/optionbutton.cpp \
+  qt/nakam/mninfodialog.cpp \
+  qt/nakam/mnmodel.cpp \
+  qt/nakam/masternodewizarddialog.cpp \
+  qt/nakam/mnrow.cpp \
+  qt/nakam/masternodeswidget.cpp \
+  qt/nakam/myaddressrow.cpp \
+  qt/nakam/sendchangeaddressdialog.cpp \
+  qt/nakam/sendconfirmdialog.cpp \
+  qt/nakam/sendcustomfeedialog.cpp \
+  qt/nakam/sendchangeaddressdialog.cpp \
+  qt/nakam/sendmultirow.cpp \
+  qt/nakam/send.cpp \
+  qt/nakam/addnewaddressdialog.cpp \
+  qt/nakam/addnewcontactdialog.cpp \
+  qt/nakam/requestdialog.cpp \
+  qt/nakam/receivewidget.cpp \
+  qt/nakam/tooltipmenu.cpp \
+  qt/nakam/addresseswidget.cpp \
+  qt/nakam/defaultdialog.cpp \
+  qt/nakam/settings/settingsbackupwallet.cpp \
+  qt/nakam/settings/settingsexportcsv.cpp \
+  qt/nakam/settings/settingsbittoolwidget.cpp \
+  qt/nakam/settings/settingsconsolewidget.cpp \
+  qt/nakam/settings/settingsdisplayoptionswidget.cpp \
+  qt/nakam/settings/settingsfaqwidget.cpp \
+  qt/nakam/settings/settingsinformationwidget.cpp \
+  qt/nakam/settings/settingsmainoptionswidget.cpp \
+  qt/nakam/settings/settingsmultisenddialog.cpp \
+  qt/nakam/settings/settingsmultisendwidget.cpp \
+  qt/nakam/settings/settingssignmessagewidgets.cpp \
+  qt/nakam/settings/settingswalletoptionswidget.cpp \
+  qt/nakam/settings/settingswalletrepairwidget.cpp \
+  qt/nakam/settings/settingswidget.cpp \
+  qt/nakam/welcomecontentwidget.cpp \
+  qt/nakam/splash.cpp
+
+
+BITCOIN_QT_CPP = $(BITCOIN_QT_BASE_CPP)
+if TARGET_WINDOWS
+BITCOIN_QT_CPP += $(BITCOIN_QT_WINDOWS_CPP)
+endif
+if ENABLE_WALLET
+BITCOIN_QT_CPP += $(BITCOIN_QT_WALLET_CPP)
+endif
+
+RES_IMAGES = \
+  qt/res/images/about.png \
+  qt/res/images/splash.png \
+  qt/res/images/splash_testnet.png \
+  qt/res/images/splash_regtest.png
+
+RES_CSS = \
+  qt/res/css/default.css \
+  qt/nakam/res/css/style_dark.css \
+  qt/nakam/res/css/style_light.css
+
+BITCOIN_RC = qt/res/nakam-qt-res.rc
+
+BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
+  -I$(builddir)/qt/forms -DQT_NO_KEYWORDS
+
+qt_libbitcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_libbitcoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_libbitcoinqt_a_OBJCXXFLAGS = $(AM_OBJCXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_libbitcoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
+  $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS)
+
+nodist_qt_libbitcoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
+  $(PROTOBUF_H) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
+
+# forms/foo.h -> forms/ui_foo.h
+QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:.ui=.h))))
+
+# Most files will depend on the forms and moc files as includes. Generate them
+# before anything else.
+$(QT_MOC): $(QT_FORMS_H)
+$(qt_libbitcoinqt_a_OBJECTS) $(qt_nakam_qt_OBJECTS) : | $(QT_MOC)
+
+#Generating these with a half-written protobuf header leads to wacky results.
+#This makes sure it's done.
+$(QT_MOC): $(PROTOBUF_H)
+$(QT_MOC_CPP): $(PROTOBUF_H)
+
+# nakam-qt binary #
+qt_nakam_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_nakam_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_nakam_qt_SOURCES = qt/nakam.cpp
+if TARGET_DARWIN
+  qt_nakam_qt_SOURCES += $(BITCOIN_MM)
+endif
+if TARGET_WINDOWS
+  qt_nakam_qt_SOURCES += $(BITCOIN_RC)
+endif
+qt_nakam_qt_LDADD = qt/libbitcoinqt.a $(LIBBITCOIN_SERVER)
+if ENABLE_WALLET
+qt_nakam_qt_LDADD += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET)
+endif
+if ENABLE_ZMQ
+qt_nakam_qt_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+endif
+qt_nakam_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
+  $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(SVG_LIBS) $(CHARTS_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
+  $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
+qt_nakam_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+qt_nakam_qt_LIBTOOLFLAGS = $(AM_LIBTOOLFLAGS) --tag CXX
+
+#locale/foo.ts -> locale/foo.qm
+QT_QM=$(QT_TS:.ts=.qm)
+
+SECONDARY: $(QT_QM)
+
+$(srcdir)/qt/nakamstrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES) $(libbitcoin_common_a_SOURCES) $(libbitcoin_zmq_a_SOURCES) $(libbitcoin_util_a_SOURCES)
+	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
+	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) PACKAGE_NAME="$(PACKAGE_NAME)" $(PYTHON) ../share/qt/extract_strings_qt.py $^
+
+translate: $(srcdir)/qt/nakamstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_BASE_CPP) qt/nakam.cpp $(BITCOIN_QT_WINDOWS_CPP) $(BITCOIN_QT_WALLET_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/nakam_en.ts
+
+$(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
+	@test -f $(RCC)
+	@cp -f $< $(@D)/temp_$(<F)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name nakam_locale $(@D)/temp_$(<F) | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+	@rm $(@D)/temp_$(<F)
+
+$(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(PROTOBUF_H)
+	@test -f $(RCC)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name nakam $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/temp_nakam_locale.qrc
+
+CLEANFILES += $(CLEAN_QT)
+
+nakam_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_nakam_qt_OBJECTS) qt/nakam-qt$(EXEEXT) $(LIBBITCOINQT)
+
+nakam_qt : qt/nakam-qt$(EXEEXT)
+
+ui_%.h: %.ui
+	@test -f $(UIC)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(UIC) -o $@ $< || (echo "Error creating $@"; false)
+
+%.moc: %.cpp
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+moc_%.cpp: %.h
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+%.qm: %.ts
+	@test -f $(LRELEASE)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LRELEASE) -silent $< -qm $@

@@ -1,0 +1,15 @@
+QT_TS = \
+  qt/locale/nakam_de.ts \
+  qt/locale/nakam_en.ts \
+  qt/locale/nakam_en_US.ts \
+  qt/locale/nakam_es.ts \
+  qt/locale/nakam_es_ES.ts \
+  qt/locale/nakam_fr_FR.ts \
+  qt/locale/nakam_hr_HR.ts \
+  qt/locale/nakam_it.ts \
+  qt/locale/nakam_ko_KR.ts \
+  qt/locale/nakam_nl.ts \
+  qt/locale/nakam_pl.ts \
+  qt/locale/nakam_ru.ts \
+  qt/locale/nakam_tr.ts \
+  qt/locale/nakam_zh_CN.ts

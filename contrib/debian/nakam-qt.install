@@ -1,0 +1,6 @@
+usr/local/bin/nakam-qt usr/bin
+share/pixmaps/nakam32.xpm usr/share/pixmaps
+share/pixmaps/nakam16.xpm usr/share/pixmaps
+share/pixmaps/nakam128.png usr/share/pixmaps
+debian/nakam-qt.desktop usr/share/applications
+debian/nakam-qt.protocol usr/share/kde4/services/
